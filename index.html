@@ -611,6 +611,62 @@
       scrollbar-width: none;
     }
     .tabs::-webkit-scrollbar { display: none; }
+    .tabs-navigation {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    .tabs-container {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .nav-arrow {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 300ms var(--ease-out);
+      backdrop-filter: blur(8px);
+      padding: 0;
+      font-size: 0;
+    }
+    .nav-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.5;
+    }
+    .nav-arrow:hover:not(.disabled) {
+      background: rgba(255, 255, 255, 0.75);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(107, 92, 246, 0.35), inset 0 0 12px rgba(107, 92, 246, 0.08);
+      color: var(--accent);
+      transform: scale(1.05);
+    }
+    .nav-arrow.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .os-state .nav-arrow {
+      background: rgba(123, 143, 255, 0.08);
+      border-color: var(--os-glass-border);
+      color: var(--os-text-primary);
+    }
+    .os-state .nav-arrow:hover:not(.disabled) {
+      background: rgba(123, 143, 255, 0.18);
+      border-color: var(--os-accent);
+      box-shadow: 0 0 24px rgba(123, 143, 255, 0.35), inset 0 0 12px rgba(123, 143, 255, 0.15);
+      color: var(--os-accent);
+    }
     .tab {
       min-height: 44px;
       flex: 0 0 auto;
@@ -1480,6 +1536,7 @@
       .tabs { gap: 6px; }
       .tab { padding: 0 14px; }
       .preview { min-height: 420px; }
+      .nav-arrow { width: 36px; height: 36px; }
     }
     @media (max-width: 1023px) {
       .container { width: min(100% - 32px, 1080px); }
@@ -1520,6 +1577,8 @@
       .cursor-dot { display: none; }
       .floating-panels .float-panel { display: none; }
       .floating-panels .float-panel.a { display: block; top: auto; left: 14px; right: 14px; bottom: 74px; width: auto; }
+      .tabs-navigation { gap: 8px; }
+      .nav-arrow { width: 32px; height: 32px; }
       .status-bar {
         left: 0;
         right: 0;
@@ -1542,6 +1601,7 @@
       .contact-method { padding: 12px 10px; }
       .mobile-menu-close { top: 14px; right: 14px; width: 42px; height: 42px; }
       .mobile-menu a { margin: 16px 0; }
+      .nav-arrow { width: 28px; height: 28px; }
     }
   </style>
     <!-- Structured Data: Professional Web Design / Digital Agency -->
@@ -1726,7 +1786,21 @@ WELCOME BACK.</div>
           <h2>Work built for real industries.</h2>
         </div>
         <div class="showcase-panel reveal card">
-          <div class="tabs" role="tablist" aria-label="Industry categories"></div>
+          <div class="tabs-navigation">
+            <button class="nav-arrow nav-arrow-left" aria-label="Scroll categories left" title="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="tabs-container">
+              <div class="tabs" role="tablist" aria-label="Industry categories"></div>
+            </div>
+            <button class="nav-arrow nav-arrow-right" aria-label="Scroll categories right" title="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
           <div class="preview" id="preview">
             <div class="preview-art" id="previewArt"></div>
             <div class="preview-content">
@@ -1963,7 +2037,7 @@ WELCOME BACK.</div>
         { key: "Fashion", style: "Minimal · Editorial", title: "A refined storefront for collections with restraint.", text: "Lookbook pacing, product detail clarity, and visual rhythm for modern fashion brands.", gradient: "linear-gradient(135deg,#f7f2ee,#222222)", shape: "fashion" },
         { key: "Portfolio", style: "Quiet · Precise", title: "Let the work breathe without disappearing.", text: "A focused portfolio system for case studies, process notes, and high-signal contact.", gradient: "linear-gradient(135deg,#f8f8f7,#d7d7d7)", shape: "portfolio" },
         { key: "Restaurant", style: "Atmospheric · Useful", title: "Reservations, menus, and story in one fast path.", text: "A hospitality site that balances operational clarity with a strong sense of place.", gradient: "linear-gradient(135deg,#fff4df,#a73d32)", shape: "restaurant" },
-        { key: "Agency", style: "Premium · Systematic", title: "A credible surface for complex creative work.", text: "A service brand architecture with crisp positioning, process, pricing, and inquiry flow.", gradient: "linear-gradient(135deg,#ffffff,#6b5cf6)", shape: "agency" },
+        { key: "Real Estate", style: "Premium · Systematic", title: "A credible surface for complex creative work.", text: "A service brand architecture with crisp positioning, process, pricing, and inquiry flow.", gradient: "linear-gradient(135deg,#ffffff,#6b5cf6)", shape: "agency", demoUrl: "https://sanpitpatro-1611.github.io/luxestate/" },
         { key: "Music", style: "Neon · Sonic", title: "Live the sound through design.", text: "A cinematic digital experience crafted for artists, labels, and modern music brands.", gradient: "linear-gradient(135deg,#ff3cac 0%,#784ba0 50%,#2b86c5 100%)", shape: "music", demoUrl: "https://indoaki-cyber.github.io/music_artist_site_demo/" }
       ];
 
@@ -2028,6 +2102,44 @@ WELCOME BACK.</div>
           }, 180);
         }
         setPreview(0);
+      }
+
+      function initTabsNavigation() {
+        const tabsContainer = document.querySelector(".tabs-container");
+        const tabs = document.querySelector(".tabs");
+        const leftArrow = document.querySelector(".nav-arrow-left");
+        const rightArrow = document.querySelector(".nav-arrow-right");
+
+        if (!tabsContainer || !tabs || !leftArrow || !rightArrow) return;
+
+        const scrollAmount = 300;
+
+        function updateArrowStates() {
+          const scrollLeft = tabs.scrollLeft;
+          const scrollWidth = tabs.scrollWidth;
+          const clientWidth = tabs.clientWidth;
+          const maxScroll = scrollWidth - clientWidth;
+
+          leftArrow.classList.toggle("disabled", scrollLeft <= 0);
+          rightArrow.classList.toggle("disabled", scrollLeft >= maxScroll - 10);
+        }
+
+        function scroll(direction) {
+          const currentScroll = tabs.scrollLeft;
+          const targetScroll = direction === "left" ? currentScroll - scrollAmount : currentScroll + scrollAmount;
+          tabs.scrollTo({
+            left: targetScroll,
+            behavior: "smooth"
+          });
+        }
+
+        leftArrow.addEventListener("click", () => scroll("left"));
+        rightArrow.addEventListener("click", () => scroll("right"));
+
+        tabs.addEventListener("scroll", updateArrowStates, { passive: true });
+        window.addEventListener("resize", updateArrowStates);
+
+        updateArrowStates();
       }
 
       function initNavigation() {
@@ -2412,6 +2524,7 @@ WELCOME BACK.</div>
       }
 
       initShowcase();
+      initTabsNavigation();
       initNavigation();
       initReveal();
       initHeroEntrance();
