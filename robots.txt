@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://hexavora.com/sitemap.xml
+Host: https://hexavora.com
+# Crawl-delay can be added if needed by the site owner

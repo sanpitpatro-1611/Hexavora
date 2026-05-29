@@ -3,9 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HEXAVORA</title>
+  <title>HEXAVORA | Premium Web Design & Development Agency</title>
+  <meta name="description" content="HEXAVORA builds premium websites for startups, creators, gyms, restaurants, businesses, and personal brands with modern design and responsive development." />
+  <meta name="keywords" content="web design, web development, responsive website, digital agency, UX, UI, performance, startup website, creator website, restaurant website, gym website, personal brand" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://hexavora.com/" />
+  <link rel="preload" href="hexavora-wordmark.png" as="image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:site_name" content="HEXAVORA" />
+  <meta property="og:title" content="HEXAVORA | Premium Web Design & Development Agency" />
+  <meta property="og:description" content="HEXAVORA builds premium websites for startups, creators, gyms, restaurants, businesses, and personal brands with modern design and responsive development." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hexavora.com/" />
+  <meta property="og:image" content="https://hexavora.com/hexavora-wordmark.png" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@hexavora_dev" />
+  <meta name="twitter:title" content="HEXAVORA | Premium Web Design & Development Agency" />
+  <meta name="twitter:description" content="HEXAVORA builds premium websites for startups, creators, gyms, restaurants, businesses, and personal brands with modern design and responsive development." />
+  <meta name="twitter:image" content="https://hexavora.com/hexavora-wordmark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
@@ -1520,7 +1544,31 @@
       .mobile-menu a { margin: 16px 0; }
     }
   </style>
-</head>
+    <!-- Structured Data: Professional Web Design / Digital Agency -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "name": "HEXAVORA",
+          "description": "HEXAVORA builds premium websites for startups, creators, gyms, restaurants, businesses, and personal brands with modern design and responsive development.",
+          "url": "https://hexavora.com/",
+          "logo": "https://hexavora.com/hexavora-wordmark.png",
+          "email": "hexavoratech@gmail.com",
+          "sameAs": ["https://www.instagram.com/hexavora_dev","https://www.linkedin.com/company/hexavora"]
+        },
+        {
+          "@type": "Organization",
+          "name": "HEXAVORA",
+          "url": "https://hexavora.com/",
+          "logo": "https://hexavora.com/hexavora-wordmark.png",
+          "contactPoint": [{ "@type": "ContactPoint", "email": "hexavoratech@gmail.com", "contactType": "customer support" }]
+        }
+      ]
+    }
+    </script>
+  </head>
 <body>
   <div class="status-pixel" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -1580,6 +1628,7 @@ WELCOME BACK.</div>
     </div>
   </div>
 
+  <header>
   <nav class="nav" id="nav">
     <div class="container nav-inner">
       <a class="logo-link" href="#top" aria-label="HEXAVORA home">
@@ -1597,6 +1646,7 @@ WELCOME BACK.</div>
       </div>
     </div>
   </nav>
+  </header>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">×</button>
