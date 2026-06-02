@@ -718,6 +718,20 @@
       background: var(--preview-gradient);
       overflow: hidden;
     }
+    .preview-art img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      display: block;
+      opacity: 0;
+      transition: opacity 260ms ease;
+    }
+    .preview-art img.loaded {
+      opacity: 1;
+    }
     .preview-art svg {
       position: absolute;
       inset: 8%;
@@ -2030,15 +2044,15 @@ WELCOME BACK.</div>
 
       const showcaseData = [
         { key: "Gym", style: "Bold · Sport", title: "Train with a site that moves like your members do.", text: "A conversion-focused fitness experience with strong scheduling cues and sharp membership pathways.", gradient: "linear-gradient(135deg,#101010,#6b5cf6)", shape: "gym" },
-        { key: "Café", style: "Warm · Minimal", title: "A calm digital counter for daily rituals.", text: "Menu storytelling, reservations, and subtle product hierarchy for neighborhood hospitality.", gradient: "linear-gradient(135deg,#f6efe7,#c68a5b)", shape: "cafe", demoUrl: "https://indoaki-cyber.github.io/HV_Cafe_demo_web/" },
-        { key: "Creator", style: "Editorial · Fluid", title: "Turn an audience into a living archive.", text: "A media-first home for launches, writing, episodes, and direct community pathways.", gradient: "linear-gradient(135deg,#f8f8f7,#8ac6ff)", shape: "creator" },
+        { key: "Café", style: "Warm · Minimal", title: "A calm digital counter for daily rituals.", text: "Menu storytelling, reservations, and subtle product hierarchy for neighborhood hospitality.", gradient: "linear-gradient(135deg,#f6efe7,#c68a5b)", shape: "cafe", demoUrl: "https://indoaki-cyber.github.io/HV_Cafe_demo_web/", image: "cafe.png" },
+        { key: "Creator", style: "Editorial · Fluid", title: "Turn an audience into a living archive.", text: "A media-first home for launches, writing, episodes, and direct community pathways.", gradient: "linear-gradient(135deg,#f8f8f7,#8ac6ff)", shape: "creator", demoUrl: "https://indoaki-cyber.github.io/content_creator/", image: "creator.png" },
         { key: "Startup", style: "Sharp · Product", title: "Explain the product before the meeting starts.", text: "A clear SaaS surface with product logic, investor-ready polish, and fast iteration paths.", gradient: "linear-gradient(135deg,#eff4ff,#6b5cf6)", shape: "startup" },
-        { key: "Carshowroom", style: "Sleek · Automotive", title: "Showcase movement with premium vehicle curation.", text: "A showroom experience for modern car brands, polished interactions, and high-impact model storytelling.", gradient: "linear-gradient(135deg,#0f172a,#1f2937)", shape: "carshowroom", demoUrl: "https://indoaki-cyber.github.io/HV_Demo_Car_showroom_web/" },
+        { key: "Carshowroom", style: "Sleek · Automotive", title: "Showcase movement with premium vehicle curation.", text: "A showroom experience for modern car brands, polished interactions, and high-impact model storytelling.", gradient: "linear-gradient(135deg,#0f172a,#1f2937)", shape: "carshowroom", demoUrl: "https://indoaki-cyber.github.io/HV_Demo_Car_showroom_web/", image: "carshowroom.png" },
         { key: "Fashion", style: "Minimal · Editorial", title: "A refined storefront for collections with restraint.", text: "Lookbook pacing, product detail clarity, and visual rhythm for modern fashion brands.", gradient: "linear-gradient(135deg,#f7f2ee,#222222)", shape: "fashion" },
-        { key: "Portfolio", style: "Quiet · Precise", title: "Let the work breathe without disappearing.", text: "A focused portfolio system for case studies, process notes, and high-signal contact.", gradient: "linear-gradient(135deg,#f8f8f7,#d7d7d7)", shape: "portfolio" },
+        { key: "Portfolio", style: "Quiet · Precise", title: "Let the work breathe without disappearing.", text: "A focused portfolio system for case studies, process notes, and high-signal contact.", gradient: "linear-gradient(135deg,#f8f8f7,#d7d7d7)", shape: "portfolio", demoUrl: "https://mobile-optimize--sanpitpatro.replit.app", image: "portfolio.png" },
         { key: "Restaurant", style: "Atmospheric · Useful", title: "Reservations, menus, and story in one fast path.", text: "A hospitality site that balances operational clarity with a strong sense of place.", gradient: "linear-gradient(135deg,#fff4df,#a73d32)", shape: "restaurant" },
-        { key: "Real Estate", style: "Premium · Systematic", title: "A credible surface for complex creative work.", text: "A service brand architecture with crisp positioning, process, pricing, and inquiry flow.", gradient: "linear-gradient(135deg,#ffffff,#6b5cf6)", shape: "agency", demoUrl: "https://sanpitpatro-1611.github.io/luxestate/" },
-        { key: "Music", style: "Neon · Sonic", title: "Live the sound through design.", text: "A cinematic digital experience crafted for artists, labels, and modern music brands.", gradient: "linear-gradient(135deg,#ff3cac 0%,#784ba0 50%,#2b86c5 100%)", shape: "music", demoUrl: "https://indoaki-cyber.github.io/music_artist_site_demo/" }
+        { key: "Real Estate", style: "Premium · Systematic", title: "A credible surface for complex creative work.", text: "A service brand architecture with crisp positioning, process, pricing, and inquiry flow.", gradient: "linear-gradient(135deg,#ffffff,#6b5cf6)", shape: "agency", demoUrl: "https://sanpitpatro-1611.github.io/luxestate/", image: "real estate.png" },
+        { key: "Music", style: "Neon · Sonic", title: "Live the sound through design.", text: "A cinematic digital experience crafted for artists, labels, and modern music brands.", gradient: "linear-gradient(135deg,#ff3cac 0%,#784ba0 50%,#2b86c5 100%)", shape: "music", demoUrl: "https://indoaki-cyber.github.io/music_artist_site_demo/", image: "music.png" }
       ];
 
       function drawPreviewSvg(shape) {
@@ -2080,13 +2094,43 @@ WELCOME BACK.</div>
           tabs.appendChild(button);
         });
 
+        function renderPreviewArt(item) {
+          const existingImage = art.querySelector("img");
+          if (!item.image) {
+            if (existingImage) existingImage.remove();
+            art.innerHTML = drawPreviewSvg(item.shape);
+            return;
+          }
+
+          const showPlaceholder = () => {
+            const currentImage = art.querySelector("img");
+            if (currentImage) currentImage.remove();
+            art.innerHTML = drawPreviewSvg(item.shape);
+          };
+
+          const img = existingImage || document.createElement("img");
+          img.alt = item.key + " preview";
+          img.loading = "lazy";
+          img.className = "";
+          img.src = item.image;
+          img.onload = () => {
+            if (art.contains(img)) img.classList.add("loaded");
+          };
+          img.onerror = showPlaceholder;
+
+          if (!art.contains(img)) {
+            art.innerHTML = "";
+            art.appendChild(img);
+          }
+        }
+
         function setPreview(index) {
           const item = showcaseData[index];
           document.querySelectorAll(".tab").forEach((tab, tabIndex) => tab.classList.toggle("active", tabIndex === index));
           preview.classList.add("switching");
           window.setTimeout(() => {
             art.style.setProperty("--preview-gradient", item.gradient);
-            art.innerHTML = drawPreviewSvg(item.shape);
+            renderPreviewArt(item);
             title.textContent = item.title;
             text.textContent = item.text;
             demoBtn.href = item.demoUrl || "#";
